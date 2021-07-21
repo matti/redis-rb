@@ -114,6 +114,15 @@ SENTINELS = [{ host: '127.0.0.1', port: 26380, password: 'mysecret' },
 redis = Redis.new(host: 'mymaster', sentinels: SENTINELS, role: :master)
 ```
 
+note that if you need to provide password for the redis instance you need to:
+
+```ruby
+SENTINELS = [{ host: '127.0.0.1', port: 26380,
+             { host: '127.0.0.1', port: 26381,]
+
+redis = Redis.new(host: 'mymaster', sentinels: SENTINELS, password: 'your-redis-password-not-sentinel-password', role: :master)
+```
+
 ## Cluster support
 
 `redis-rb` supports [clustering](https://redis.io/topics/cluster-spec).
